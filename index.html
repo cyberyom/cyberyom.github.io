@@ -3,31 +3,20 @@
 <head>
 	<title>Yoms Blog</title>
 	<style>
+		body {
+			margin: 0;
+			padding: 0;
+			display: flex;
+			flex-direction: column;
+			min-height: 100vh;
+		}
+
 		header {
 			background-color: #333;
 			color: white;
 			padding: 10px;
 			text-align: center;
 		}
-		
-		body {
-     			margin: 0;
-     			padding: 0;
-    			height: 100%;
-    		}
-
-   		.content {
-     			min-height: 100%;
-     			margin-bottom: 50px;
-  		}
-		
-		.footer {
-  			background-color: #333;
-    			height: 50px;
-   			width: 100%;
-     			position: relative;
-	      		bottom: 0;
-  		}
 
 		nav {
 			display: flex;
@@ -42,7 +31,15 @@
 		}
 
 		main {
+			flex: 1;
 			padding: 20px;
+		}
+
+		.footer {
+			background-color: #333;
+			color: white;
+			padding: 10px;
+			text-align: center;
 		}
 	</style>
 </head>
@@ -50,27 +47,26 @@
 	<header>
 		<h1>Yoms Blog</h1>
 		<div class="subtitle">
-		<p>This is my personal blog where I share my thoughts and experiences.</p>
+			<p>This is my personal blog where I share my thoughts and experiences.</p>
 		</div>
+		<nav>
+			<a href="index.html">ESXI</a>
+			<a href="about.html">Programming</a>
+			<a href="contact.html">Malware</a>
+		</nav>
+	</header>
+	<main>
+		<h2 class="indented">Welcome to My Website</h2>
+		<div class="content">
+			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac turpis nec diam venenatis tincidunt a ac justo. Ut gravida tortor at nibh ullamcorper, vel ultricies quam tempor. Nam sit amet libero quis ex congue tincidunt. Aliquam bibendum orci eu turpis fringilla, vitae fringilla odio imperdiet. Integer sit amet diam a ex aliquam gravida. Sed auctor quam eu metus bibendum consectetur. Etiam vel mauris quis ipsum malesuada mattis vel vel mi. Donec tincidunt felis at finibus ultrices. Integer sodales efficitur nisi ut venenatis. Nulla facilisi. Sed commodo hendrerit enim, ac facilisis nibh vulputate quis.</p>
+		</div>
+	</main>
+	<footer class="footer">
 		<nav>
 			<a href="index.html">Home</a>
 			<a href="about.html">About</a>
-			<a href="contact.html">Contact</a>
+			<a href="contact.html">Contact me</a>
 		</nav>
-		
-	</header>
-	<main>
- 		<h2 class="indented">Welcome to My Website</h2>
-		<div class="content">
- 		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac turpis nec diam venenatis tincidunt a ac justo. Ut gravida tortor at nibh ullamcorper, vel ultricies quam tempor. Nam sit amet libero quis ex congue tincidunt. Aliquam bibendum orci eu turpis fringilla, vitae fringilla odio imperdiet. Integer sit amet diam a ex aliquam gravida. Sed auctor quam eu metus bibendum consectetur. Etiam vel mauris quis ipsum malesuada mattis vel vel mi. Donec tincidunt felis at finibus ultrices. Integer sodales efficitur nisi ut venenatis. Nulla facilisi. Sed commodo hendrerit enim, ac facilisis nibh vulputate quis.</p>
-	</main>
-
-	<style>
- 		.indented {
-  		 margin-left: 20px;
- 		}
-	</style>
-	
-	<footer class="footer"></footer>
+	</footer>
 </body>
 </html>
