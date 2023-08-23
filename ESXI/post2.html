@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cyberyom HQ</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/index.html">CyberYom</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="/about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="/ESXI/post2.html">Most Recent Post</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/ESXI/img/post-bg.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>ESXI Homelab Setup I!</h1>
+                        <h2 class="subheading">The second post of the ESXI homelab adventure...</h2>
+                        <class="post-meta">Posted by CyberYom on July 26, 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>Howdy all! This post is going to be a bit shorter of a post… I will be talking about how to deploy vms to the esxi host! There are really two ways to do this… by setting up a fresh VM using an iso file, or by importing a premade vm, in the form of OVA files. I will probably be using both, but I usually choose OVA files when they are available, as the process to spin up the VM is generally faster (iso files require you to run through it like you are first setting up the vm, making you choose networking, where to install the OS, user accounts, et). OVA files are already made, so you really just need to import them, and you’re good to go.</p>
+					
+					<h2 class="section-heading">Choosing my VMs</h2>
+					
+					<p>Now, I won't be discussing what I will be doing for personal services, I don’t find it all too important or relevant, because that stuff is just kind of small personal things that I don’t necessarily want to put out there on this blog. That being said, let's revisit the network map that was featured in the previous post. </p>
+					
+					<a href="#">
+                        <img class="img-responsive center-block" src="/ESXI/img/networkmap.png" alt="">
+                    </a>
+					
+					<p>Let's discuss what each VM will be before proceeding. Obviously, PFsense will be PFsense. DFIR Analysis and Flareon will both be windows 10, so lets add that into the shopping bag. Remnux, Security Onion, and Tsurugi are Ubuntu based VMs, so these will be an Ubuntu distro. After thinking a little bit about how I should go about choosing an EDR, I decided to go with Velociraptor, which I will just run off an Ubuntu server VM, simply because this is how I have done it previously.</p>
+					
+					<p>Why Velociraptor you ask? Well, during my journey through college, I used it a few times, and I was never really able to effectively hunt using it. I wanted it to be the source of my EDR here so I can begin to get better with it. Once this has been achieved, a different EDR will be subbed in.</p>
+					
+					<p>Back to the VMs. Those will be my analysis suite, but let's talk about the TestNet. The TestNet will be used to run simulations in, to learn how to hunt the simulations, as well as outright conduct them. Kind of killing two birds with one stone, being learning red team, and blue team, at the same time. It will also be used for testing new and cool discoveries.</p>
+					
+                    <h2 class="section-heading">TestNet</h2>
+
+                    <p>I chose to go with vyOS, because surprisingly, this is probably the router/firewall that I am most skilled in. During my time in school, I created some fairly large networks using vyOS, and it has been my preferred router for most of my personal work, so I went with it here. </p>
+					
+					<p>As can be seen from the network map, we currently have an IT subnet, HR subnet, and ACC subnet. Now, just to be clear, the network map shown above is NOT the final product, this was an initial mock-up done at 2:30 in the morning. That being said, currently my thought is having a Windows Server 2019 as AD in IT, with 2 windows 10 machines. In Acc, I will go with a windows 10 vm, and an xubuntu. In HR, it will be the same as Acc, but with windows 11 instead of windows 10 (xubuntu, windows 11).</p>
+					
+					<h2 class="section-heading">Summary</h2>
+					 
+					<p>	It currently seems that I will spin up 6 windows VMs, with 1 being windows 11, a windows server 2019, 2 xubuntu VMs, and 4 Ubuntu based VMs (Remnux, Tsurugi, SO, Velociraptor). Time to start importing!</p>
+					
+					<h2 class="section-heading">Putting words to action</h2>
+					
+					<p>For the windows VMs, I just use the microsoft base win10 vm. I find it to be much quicker to import that, rather than use the ISO and run through Microsoft's annoying process of starting from scratch.</p>
+					
+					<p>As for the servers, I find it best to search Turnkey Linux for premade servers. If you don’t know Turnkey Linux, go check it out. There are tons of premade VMs to use in your projects. I will use Turnkey for Active Directory. Thanks turnkey! Unfortunately, it doesn’t seem like turnkey has any of the other VMs I will use, but if you ever need a file server quickly, check it out!</p>
+					
+					<p>OK, enough talk, let's start importing. I'll save the networking for another post. To import an ISO (as some of these require ISOs rather than OVA), I selected the datastore to import to, and then clicked “upload”</p>
+					
+					<a href="#">
+                        <img class="img-responsive center-block" src="/ESXI/img/datastore.png" alt="">
+                    </a>
+					
+					<p>Then you will just upload all the ISOs you need to!</p>
+					
+					<p>To deploy from an ISO file, I will click “Create / Register VM” in the Virtual Machines tab, and follow the wizard. I will not get into the specs of each VM here. </p>
+					
+					<a href="#">
+                        <img class="img-responsive center-block" src="/ESXI/img/import.png" alt="">
+                    </a>
+					
+					<p>As for importing, it is very similar, but you do NOT need to upload the ova file to the datastore, you will just import it directly from your host. Click the  “Create / Register VM” in the Virtual Machines tab again, and click “Deploy a virtual machine from an OVF or OVA file”, and follow the steps for the installation wizard.</p>
+					
+					<a href="#">
+                        <img class="img-responsive center-block" src="/ESXI/img/importova.png" alt="">
+                    </a>
+					
+					<p>After this, I did this same process for each VM in my network map! After this, I was left with 15 VMs! Ready to be networked in the next post!</p>
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+      <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="https://twitter.com/_cyberyom">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/thomas-claflin/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/cyberyom/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; CyberYom 2023</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
