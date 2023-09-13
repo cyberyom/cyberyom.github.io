@@ -1,151 +1,199 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-	<title>memprocfs</title>
-	<style>
-		body {
-			margin: 0;
-			padding: 0;
-			display: flex;
-			flex-direction: column;
-			min-height: 100vh;
-		}
 
-		header {
-			background-color: #333;
-			color: white;
-			padding: 10px;
-			text-align: center;
-		}
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-		nav {
-			display: flex;
-			justify-content: center;
-			margin-top: 10px;
-		}
+    <title>Cyberyom HQ</title>
 
-		nav a {
-			color: white;
-			margin: 0 10px;
-			text-decoration: none;
-		}
+    <!-- Bootstrap Core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
-		main {
-			flex: 1;
-			padding: 20px;
-		}
+    <!-- Theme CSS -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
 
-		.footer {
-			background-color: #333;
-			color: white;
-			padding: 10px;
-			text-align: center;
-		}
-		
-		.indented {
-   			margin-left: 50px;
-		}
-	</style>
+    <!-- Custom Fonts -->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
 </head>
+
 <body>
-	<header>
-		<h1>MemprocFS</h1>
-		<div class="subtitle">
-			<p>This post, which happens to be my first post, will be focusing on a very helpful tool called memprocFS. MemprocFS is a tool that essentially allows you to mount memory as a disk, allowing you to browse the contents of memory, like a disk image.</p>
-		</div>
-	</header>
-	
-	<main>
-		<div class="content">
-			<p style="line-height: 100%; margin-bottom: 0in">
-<font face="Lucida Console, monospace"><font size="6" style="font-size: 22pt"><b>What
-is MemProcFS?</b></font></font></p>
-<p style="font-weight: normal; line-height: 100%; margin-bottom: 0in">
-<font face="Lucida Console, monospace"><font size="3" style="font-size: 12pt">MemprocFS
-is </font></font>
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/index.html">CyberYom</a>
+            </div>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><font face="Lucida Console, monospace"><font size="6" style="font-size: 22pt"><b>Installing
-MemProcFS</b></font></font></p>
-<p style="line-height: 100%; margin-bottom: 0in"><font face="Lucida Console, monospace"><font size="3" style="font-size: 12pt"><span style="font-weight: normal">MemProcFS
-can be found on Ulf Frisk’s <a href="https://github.com/ufrisk/MemProcFS">github</a>
-page. Ulf is a Swedish IT security specialist who currently owns a
-company called MemSec AB. MemProcFS is as simple as download the
-zipped up binaries on the released page of Ulf’s GitHub. As of the
-time of writing this, MemProcFS is currently on version 5.6.3. </span></font></font>
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="/about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="/tools/memprocfs.html">Most Recent Post</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-</p>
-<p style="font-weight: normal; line-height: 100%; margin-bottom: 0in">
-<font face="Lucida Console, monospace"><font size="3" style="font-size: 12pt">Once
-it is downloaded, you can simple run it via CLI using <font face="MingLiU-ExtB, serif">MemProcFS.exe</font>
-and you will be greeted with the help menu.</font></font></p>
-<p style="line-height: 100%; margin-bottom: 0in"><img src="test_html_60b35f7e1f92be06.png" name="Image1" align="left" width="665" height="348" border="0"/>
-<br/>
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/tools/img/tools.jpg')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Expanding your Toolkit: MemProcFS</h1>
+                        <h2 class="subheading">A way to mount memory as a disk...</h2>
+                        <class="post-meta">Posted by CyberYom on September 6, 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>Howdy! This post will be the first post in the Expanding your Toolkit series. In this series, I will talk about different DFIR related tools and how to use them. I will try not to post any tools that everyone knows, but if I find that a large part of the community is unaware about awesome tools, I will try to write about them! This post will be dedicated to a tool called MemProcFS.</p>
+					
+					<h2 class="section-heading">What is MemProcFS?</h2>
+					
+					<p>MemprocFS is an open-source memory forensics tool that is an easy and convenient way of actually viewing memory as files, mounted to a network drive. You can actually browse memory, as if it were a disk! Crazy! It is written by a gentleman named Ulf Frisk, a Swedish security researcher.</p>
+					
+					<p>It can analyze memory dumps, as well as live memory analysis with Dumpit, OR Winpmem integration. It also supports live memory read-write mode, as well as a PCILeech memory integration for reading from hardware devices. For those of you in DFIR, it can take remote acquisitions over a secure connection using what Ulf calls a LeechAgent. </p>
+					
+					<h2 class="section-heading">Installing MemProcFS</h2>
+					
+					<p>MemProcFS can be found on Ulf Frisk’s github page. MemProcFS is as simple as downloading the zipped up binaries on the released page of Ulf’s GitHub. As of the time of writing this, MemProcFS is currently on version 5.8, introducing support for ARM64 windows devices! </p>
+					
+					<p>Once it is downloaded, you will need a few dependencies, being Python and the Dokan file system. Once these are downloaded, you can simply run it via CLI using MemProcFS.exe and you will be greeted with the help menu. </p>
+					
+					<a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/memproc.png" alt="">
+                    </a>
+					
+					<h2 class="section-heading">Detection with MemProcFS</h2>
+					
+					<p>I won’t mention most of the flags here, I encourage all of you to go ahead and download the tool, and try it out for yourself, but one I do want to mention is the forensic flag. This will start what Ulf calls a “forensic scan” of physical memory after startup. This will essentially scan memory for anything that it deems as suspicious and … . You will have to choose between 4 modes, which will essentially be how you want your sql database to run. You can choose between in memory, deletion upon exiting the tool, a temp database that will remain upon exit, or a static database. I typically chose 1, which is in memory sql databases. </p>
+					
+					<p>To run Memprocfs, we will run the following command: MemProcFS.exe -device C:\Path\To\Memory.mem -forensic 1. The output will be similar to that below: </p>
+					
+					<a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/detection.png" alt="">
+                    </a>
+					
+					<p>Nothing else will be shown on the CLI from this point on. But what you will notice is that there is a new drive mounted to your system! </p>
+					
+					<a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/files.jpg" alt="">
+                    </a>
+					
+					<p>I will not dive into each and every folder shown here, but I will talk about a few of these. First, the forensic folder; the forensic folder is a collection of batch oriented comprehensive analysis tasks done by the tool. These include MTF scanning (on NTFS), timeline analysis of processes, the registry, and more. This typically takes some time after first running the MemProcFS command, so be patient.  </p>
+					
+					<p>Next, we have the misc folder. This folder contains various things like bitlocker recovery, web artifacts, process info, the search functions (using Yara), and a phys2virt folder, which allows you to specify a physical memory address to scan. </p>
+					
+					<p>The name and PID folder both relate to process activity, one going by process names and one going with process IDs. </p>
+					
+					<p>The sys folder contains lots of general information on the system itself. </p>
+					
+					<p>The VM directory won’t always be there, however if your image contains virtual machines, then this folder will attempt to process them. </p>
+					
+					<h2 class="section-heading">Wrapping Up</h2>
+					
+					<p>MemProcFS essentially allows you to mount memory as a disk, and browse through it as you would a filesystem. It is insanely powerful, and easy to use. I hope that after reading this brief post, it is a tool that you decide to try out, and potentially integrate into your next investigation. </p>
+					
+					<p>The tool is open source and can be found on Ulfs github page. Keep an eye out for my next post, where I will cover a tool that goes along with MemProcFS very nicely, being MemProcFS Analyzer. </p>
+					
+					<p>This tool was built to automate the workflow using MemProcFS (as if it wasn’t quick enough already…). I will try to get this post out in mid september, but I will be traveling to the HTCIA conference in Phoenix. Hope to see you there! </p>
+					
+                </div>
+            </div>
+        </div>
+    </article>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+    <hr>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+      <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="https://twitter.com/_cyberyom">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/thomas-claflin/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/cyberyom/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; CyberYom 2023</p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
+    <!-- Theme JavaScript -->
+    <script src="/js/clean-blog.min.js"></script>
 
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><font face="Lucida Console, monospace"><font size="6" style="font-size: 22pt"><b>Detection
-with MemprocFS</b></font></font></p>
-<p style="font-weight: normal; line-height: 100%; margin-bottom: 0in">
-<font face="Lucida Console, monospace"><font size="3" style="font-size: 12pt">All
-you need to do to mount a memory image is run </font></font>
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><font face="Lucida Console, monospace"><font size="6" style="font-size: 22pt"><b>MemprocFS
-Analyzer</b></font></font></p>
-<p style="line-height: 100%; margin-bottom: 0in"><br/>
-
-</p>
-<p style="line-height: 100%; margin-bottom: 0in"><font face="Lucida Console, monospace"><font size="6" style="font-size: 22pt"><b>Conclusion</b></font></font></p>
-		</div>
-	</main>
-	
-	<footer class="footer">
-		<p>&copy; 2023 MemprocFS. All rights reserved.</p>
-	</footer>
 </body>
+
 </html>
