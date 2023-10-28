@@ -55,7 +55,7 @@
                         <a href="/about.html">About</a>
                     </li>
                     <li>
-                        <a href="/tools/memprocfs.html">Last Post</a>
+                        <a href="/OlderPosts.html">All Posts</a>
                     </li>
                 </ul>
             </div>
@@ -91,7 +91,7 @@
 								
 					<p>I wanted to write this post on the subject because I feel one of the best ways to get better at something is to teach folks how to actually do it. So let's get started with the post.</p>
 					
-					<p>Before we get into the thick of it, I wanted to mention that I will be compiling  this using a 32 bit version of arch Linux. The reasoning behind Arch Linux is a different story, but as I mentioned above, this will be a 32 bit program. I will end up compiling it as an ELF file, as this is a linux executable file, and it will be a simple CLI program. Nothing special. I will be using vim as an IDE for this, because vim is OP.</p>
+					<p>Before we get into the thick of it, I wanted to mention that I will be compiling  this using a 32 bit version of Ubuntu. I will end up compiling it as an ELF file, as this is a linux executable file, and it will be a simple CLI program. Nothing special. I will be using vim as an IDE for this, because vim is OP.</p>
 					
                     <h2 class="section-heading">Defining Sections</h2>
 
@@ -115,12 +115,16 @@
 
                     <p> Ok cool, we know the instructions we will use, and we have defined the variables that will be used in our program. Now to actually start doing things.</p>
 
-                    <p> One thing to remember is that this is a 32 bit intel program. It will be different based on your CPU architecture, meaning if you write in in a x64 bit syntax, it will not work on a 32 bit system, or if you write in in Intel syntax, it will not work on Arm based systems. To start, the first thing we will want to do is write the syscall needed to write data to the first memory register, eax. To do this, we need to know the value for the write syscall. In Arch, I can check this in the file called unistd_32.h file. After running a simple find command for it, it is located at … . This is simply a help file that defines all the syscalls and what their associated value is. I will attach a picture below if you do not have this, but I am sure it is fairly easy to find online: </p>
-
-                    <p> As can be seen, the write syscall has the value 0x4. Cool! Time to write our first instruction! We will need to move this value to the eax value. The syntax for this is fairly simple, it is simply mov eax, 0x4. Make sure the comma is added! Now, syscalls typically will have parameters that need to be passed to them. In this case, the write syscall has 3 that need to be defined (on Arch, this can be checked with the command man 2 write, where 2 will specify the linux programmer's manual). The 3 parameters are the file descriptor, the data to be written, and the length of the data (this is why we needed to define it in the .data section (: ). Seems easy enough. As mentioned, the first one is the file descriptor. File descriptor will tell the system how to use the data defined in the other parameters (I believe, please correct me if I am wrong, as I am still learning). Feel free to check this reference to read more: https://en.wikipedia.org/wiki/File_descriptor. In this case, we want to use 1, which is for standard output. This will essentially tell the system to write the bytes descripted in the 3rd parameter from the variable defined in the 2nd variable, to the standard output, which is the terminal by default. The second parameter is the value we actually want to write, which is the "hello" variable. And the third parameter is the length of what is being written, which is the "hello_length" variable. These parameters will all need to be passed to different memory registers, which will be ebx, ecx, and edx, and use the same syntax as writing the write syscall to eax. </p>
+                    <p>One thing to remember is that this is a 32 bit intel program. It will be different based on your CPU architecture, meaning if you write in in a x64 bit syntax, it will not work on a 32 bit system, or if you write in in Intel syntax, it will not work on Arm based systems. To start, the first thing we will want to do is write the syscall needed to write data to the first memory register, eax. To do this, we need to know the value for the write syscall. For this, we can reference the unistd_32.h file. This is simply a help file that defines all the syscalls and what their associated value is. You can find it at a github repository <a href="https://github.com/spotify/linux/blob/master/arch/x86/include/asm/unistd_32.h" target="_blank" rel="noopener noreferrer">here</a>, or reference the screenshot below. </p>
 
                     <a href="#">
                         <img class="img-responsive center-block" src="/coding/images/img3.png" alt="">
+                    </a>
+
+                    <p> As can be seen, the write syscall has the value 0x4. Cool! Time to write our first instruction! We will need to move this value to the eax value. The syntax for this is fairly simple, it is simply mov eax, 0x4. Make sure the comma is added! Now, syscalls typically will have parameters that need to be passed to them. In this case, the write syscall has 3 that need to be defined (on Ubuntu, this can be checked with the command man 2 write, where 2 will specify the linux programmer's manual). The 3 parameters are the file descriptor, the data to be written, and the length of the data (this is why we needed to define it in the .data section (: ). Seems easy enough. As mentioned, the first one is the file descriptor. File descriptor will tell the system how to use the data defined in the other parameters (I believe, please correct me if I am wrong, as I am still learning). Feel free to check this reference to read more <a href="https://en.wikipedia.org/wiki/File_descriptor" target="_blank" rel="noopener noreferrer">here</a>. In this case, we want to use 1, which is for standard output. This will essentially tell the system to write the bytes descripted in the 3rd parameter from the variable defined in the 2nd variable, to the standard output, which is the terminal by default. The second parameter is the value we actually want to write, which is the "hello" variable. And the third parameter is the length of what is being written, which is the "hello_length" variable. These parameters will all need to be passed to different memory registers, which will be ebx, ecx, and edx, and use the same syntax as writing the write syscall to eax. </p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/coding/images/img4.png" alt="">
                     </a>
 
                     <p>After this, we will need to interrupt what is happening. As I mentioned, the int instruction is used to interrupt the flow of execution of the program, so since we already pushed all of the parameters needed for the write syscall, we will now use this. It will look like int 0x80. As can be seen, I used 0x80 as the interrupt number. This is the interrupt call for a software interrupt, rather than a traditional hardware interrupt. It is also known as a syscall interrupt, which is essentially what I will be using. </p>
@@ -130,14 +134,14 @@
                     <p> The finalized code can be seen below! </p>
 
                     <a href="#">
-                        <img class="img-responsive center-block" src="/coding/images/img4.png" alt="">
+                        <img class="img-responsive center-block" src="/coding/images/img5.png" alt="">
                     </a>
 					
 					<h2 class="section-heading">Compiling the Program</h2>
 					 
-					<p>	Ok cool, we have our program written. Now, we need to actually compile it. To do this, first you will convert it to an object file, as mentioned. First, we need to install the package for nasm. On Arch, the way to do this will be the command: sudo pacman -S nasm. Now, you will need to run the command: nasm -f elf hello.asm. This will save our program as hello.o. </p>
+					<p>	Ok cool, we have our program written. Now, we need to actually compile it. To do this, first you will convert it to an object file, as mentioned. First, we need to install the package for nasm. On Ubuntu, the way to do this will be the command: sudo pacman -S nasm. Now, you will need to run the command: nasm -f elf hello.asm. This will save our program as hello.o. </p>
 
-                    <p> Once you have this, you need to install binutils. You can do this (again, I am on arch) by running the command: sudo pacman -S binutils </p>
+                    <p> Once you have this, you need to install binutils. You can do this (again, I am on Ubuntu) by running the command: sudo pacman -S binutils </p>
 
                     <p> Once it is installed you need to run the command: ld -m elf_i386 -s -o hello hello.o </p>
 
@@ -146,7 +150,7 @@
                     <P> We need to make it executable. This can be done with the command: sudo chmod +x hello. This will make the file executable and will allow you to run it! Run it with the command: ./hello. And there you go! You will see your message! </p>
 
                     <a href="#">
-                        <img class="img-responsive center-block" src="/coding/images/img5.png" alt="">
+                        <img class="img-responsive center-block" src="/coding/images/img6.png" alt="">
                     </a>
 
 					
