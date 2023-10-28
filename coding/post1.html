@@ -98,7 +98,7 @@
 					<p>The way assembly works is you need to define different sections, and each section will have its own role. For this simple program, we will need to define two sections, being the .text and the .data sections. The .text section is for the actual instructions we are passing to the processor, while the .data section is for defining our data which will be processed by our instructions, in this case, a couple variables. This is a simple thing to do. What it will consist of doing is just writing the .text and .data sections. We will then add things below them. </p>
 
                     <a href="#">
-                        <img class="img-responsive center-block" src="/coding/images/" alt="">
+                        <img class="img-responsive center-block" src="/coding/images/img1.png" alt="">
                     </a>
 					
                     <p> Then, I will need to define where the execution starts. I will be using global start in this case. This is essentially specifying the entry point to the program. Before the .text section. I need to specify global start by adding the Global_ start text. Then, before all of my code in the .text section, I will add the _start:. This needs to be before the code because the _start: is essentially a symbol recognized by the system to initialize the program start, invoke syscalls, and execute program logic.</p>
@@ -108,7 +108,7 @@
                     <p>After this, I will go ahead and define my variables. This will be done in the .data section. I want to define two different variables. The first is the actual text that we want to print to the screen. This will be a simple "Hello, Cyberyom viewers!" message. To do this, you should write the name of the variable that you wish to define, in my case, it will be 'hello'. In assembly, you wont set it as equal like in different languages, but you will use "db", which stands for "define bytes". This is essentially setting the variable "Hello" to whatever you want the variable to be equal to. Then you will define the string that the variable will represent in between quotes. Now, this will be followed by 0xA. This is hex for 10. In assembly, we need to use 0xA for a line break. You can use python to see what it represents, or simply run man ascii, which would be \n (linebreak). The next variable I will define is "hello_length". We will come back to exactly why we need to define this later, but to do this, there are really two ways. The first is to count how many bytes are used in the "hello" string, but this can be a little inconsistent, and hard depending on the size of the string. The way we will do it is by taking the "hello" string, and just setting a new variable to the length of that string. To do this, instead of using db (define bytes), we will use equ, which is used as equal. Then, we will throw the characters "$ -" after to specify that we want the length of the contents of a variable. After this, we will add the variable to which we want the length of. The picture below will outline what was just said</p>
 					
                     <a href="#">
-                        <img class="img-responsive center-block" src="/coding/images/" alt="">
+                        <img class="img-responsive center-block" src="/coding/images/img2.png" alt="">
                     </a>
 
 					<p>Ok sweet, now we have all the variables we need defined. Our .data section is done. First a string to actually print to the screen, and then also the length of the string defined in a separate variable. Now, we need to start working with the .text section. The way assembly works is it has various instructions that are used to interact with the processor. I will cover two in this post. The first is the mov instruction, and the second is the int instruction. The mov instruction essentially moves data around memory, to different registrars and such like that. We will use that the most. The second instruction is the int instruction, this is the interrupt instruction. Int will essentially interrupt the flow of instruction sent to the processor. It takes one parameter, which is an interrupt number. Different numbers will allow for different things, and we will get more into which interrupt number I will use here when the time comes. </p>
@@ -120,7 +120,7 @@
                     <p> As can be seen, the write syscall has the value 0x4. Cool! Time to write our first instruction! We will need to move this value to the eax value. The syntax for this is fairly simple, it is simply mov eax, 0x4. Make sure the comma is added! Now, syscalls typically will have parameters that need to be passed to them. In this case, the write syscall has 3 that need to be defined (on Arch, this can be checked with the command man 2 write, where 2 will specify the linux programmer's manual). The 3 parameters are the file descriptor, the data to be written, and the length of the data (this is why we needed to define it in the .data section (: ). Seems easy enough. As mentioned, the first one is the file descriptor. File descriptor will tell the system how to use the data defined in the other parameters (I believe, please correct me if I am wrong, as I am still learning). Feel free to check this reference to read more: https://en.wikipedia.org/wiki/File_descriptor. In this case, we want to use 1, which is for standard output. This will essentially tell the system to write the bytes descripted in the 3rd parameter from the variable defined in the 2nd variable, to the standard output, which is the terminal by default. The second parameter is the value we actually want to write, which is the "hello" variable. And the third parameter is the length of what is being written, which is the "hello_length" variable. These parameters will all need to be passed to different memory registers, which will be ebx, ecx, and edx, and use the same syntax as writing the write syscall to eax. </p>
 
                     <a href="#">
-                        <img class="img-responsive center-block" src="/coding/images/" alt="">
+                        <img class="img-responsive center-block" src="/coding/images/img3.png" alt="">
                     </a>
 
                     <p>After this, we will need to interrupt what is happening. As I mentioned, the int instruction is used to interrupt the flow of execution of the program, so since we already pushed all of the parameters needed for the write syscall, we will now use this. It will look like int 0x80. As can be seen, I used 0x80 as the interrupt number. This is the interrupt call for a software interrupt, rather than a traditional hardware interrupt. It is also known as a syscall interrupt, which is essentially what I will be using. </p>
@@ -130,7 +130,7 @@
                     <p> The finalized code can be seen below! </p>
 
                     <a href="#">
-                        <img class="img-responsive center-block" src="/coding/images/" alt="">
+                        <img class="img-responsive center-block" src="/coding/images/img4.png" alt="">
                     </a>
 					
 					<h2 class="section-heading">Compiling the Program</h2>
@@ -146,7 +146,7 @@
                     <P> We need to make it executable. This can be done with the command: sudo chmod +x hello. This will make the file executable and will allow you to run it! Run it with the command: ./hello. And there you go! You will see your message! </p>
 
                     <a href="#">
-                        <img class="img-responsive center-block" src="/coding/images/" alt="">
+                        <img class="img-responsive center-block" src="/coding/images/img5.png" alt="">
                     </a>
 
 					
