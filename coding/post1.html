@@ -139,9 +139,9 @@
 					
 					<h2 class="section-heading">Compiling the Program</h2>
 					 
-					<p>	Ok cool, we have our program written. Now, we need to actually compile it. To do this, first you will convert it to an object file, as mentioned. First, we need to install the package for nasm. On Ubuntu, the way to do this will be the command: sudo pacman -S nasm. Now, you will need to run the command: nasm -f elf hello.asm. This will save our program as hello.o. </p>
+					<p>	Ok cool, we have our program written. Now, we need to actually compile it. To do this, first you will convert it to an object file, as mentioned. First, we need to install the package for nasm. On Ubuntu, the way to do this will be the command: sudo apt-get install -y nasm. Now, you will need to run the command: nasm -f elf hello.asm. This will save our program as hello.o. </p>
 
-                    <p> Once you have this, you need to install binutils. You can do this (again, I am on Ubuntu) by running the command: sudo pacman -S binutils </p>
+                    <p> Once you have this, you need to install binutils. You can do this (again, I am on Ubuntu) by running the command: sudo apt-get install -y binutils </p>
 
                     <p> Once it is installed you need to run the command: ld -m elf_i386 -s -o hello hello.o </p>
 
