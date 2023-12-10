@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cyberyom HQ</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/index.html">CyberYom</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="/about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="/OlderPosts.html">All Posts</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/tools/img/tool.png')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Expanding your Toolkit: MemProcFS-Analyzer</h1>
+                        <h2 class="subheading">Expanding Functionality of MemProcFS</h2>
+                        <class="post-meta">Posted by CyberYom on November 25, 2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>Howdy all! Back with another Expanding your Toolkit post, kind of piggy backing off of a previous one, which was the MemProcFS post. In this post, we will be looking at a tool called MemProcFS Analyzer. MemProcFS Analyzer is a powershell script that utilizes the Dokan file system to run, as well as the Microsoft .net 6 libraries. It was developed by Martin Willing of Lethal Forensics. It is meant to be a way to simplify and optimize your memory analysis workflow.</p>
+
+                    <p>It is simply hard to believe that MemProcFS can get even easier to use, but it seems, thanks to Martin's hard work, it is!</p>
+					
+					<h2 class="section-heading">More about the Tool!</h2>
+					
+					<p>Let's cut the small talk and get right into the fun part! So before using MemProcFS Analyzer, there are a few dependencies that one needs before using it, specifically, the Dokan file system, and .NET 6. Dokan can be downloaded from a github repo linked <a href="https://github.com/dokan-dev/dokany/releases" target="_blank" rel="noopener noreferrer">here</a>, from a repo called Dokan-Dev. You can find the .NET 6 runtime on Microsoft's official website, <a href="https://dotnet.microsoft.com/en-us/download/dotnet/6.0" target="_blank" rel="noopener noreferrer">here</a>. Obviously, you will also need MemProcFS’s dependencies, which are Python to be downloaded. </p>
+					
+					<p>Cool!</p>
+					
+                    <p> As far as running the tool, all you need to do is download a copy of MemProfFS Analyzer, from Martin Willings github, linked <a href="https://github.com/evild3ad/MemProcFS-Analyzer" target="_blank" rel="noopener noreferrer">here</a>. Once you have it downloaded, go ahead and open Powershell (with administrator privileges) in the directory of the powershell script, MemProcFS-Analyzer.ps1. Lets take a look at the root directory of MemprocFS-Analyzer. </p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/mpa-files.png" alt="">
+                    </a>
+
+
+					<h2 class="section-heading">Installing MemProcFS</h2>
+                    <p> As can be seen, there are 3 directories, with the powershell script. The first directory, called Scripts, holds custom scripts used by MemProcFS-Analyzer. The second directory, called Tools, holds all of the 3rd party tools used by the script, including MemProcFS. The last directory, called yara, is a directory that you can add custom yara rules to, as the tool does support custom yara rules. </p>
+
+                    <p>	To run the tool, simply run ./MemProcFS-Analyzer.ps1. Upon running the tool, the first thing that you will be greeted with is a popup window having you specify where your memory dump is, and if you have the windows pagefile, you can give that here as well. You can see the pop-up window below. </p>
+
+                     <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/mpa.png" alt="">
+                    </a>
+
+                    <p> As can be seen, there are a couple of options being presented right off the gate. First, we can see a checkmarkable box for custom YARA rules. With this checked, it will take any yara rules you have added to the “yara” directory, and run them. We can also see a checkmarkable box for “ClamAV Scan”. Note that you must have clamAV setup and configured if you want to use this option.  With this checked, the script will run ClamAV across any executable found in the memory image. These two options are great for hunting potentially malicious executable files. If you know exactly what file caused issues, but are unsure if it is found in your memory image, then you can utilize the custom yara rules value. If you know that some kind of malware hit the memory image, but are unsure of what that may be, then you can enable the ClamAV scan. </p>
+
+                    <p>The other two options are added for timelining. You can have the tool produce a forensic timeline of the events that took place in the memory image, providing you with the option of having a CSV structured timeline, or a XLSX structured timeline. Up to you!</p>
+
+                    <h2 class="section-heading">Demonstration on a Memory Image</h2>
+
+
+                    <p> Let's move from talking about the tool to actually processing memory with it. For this post, I will be using a memory image found on Ali Hadi’s blog, ashemery.com; specifically, I will be using a memory image from an attack by a ransomware called RansomCare. He has a little challenge going with this image, and if you are interested, you can find that here [LINK]. The settings I am using for MemProcFS-Analyzer can be seen below. </p>
+
+                     <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/mpa-options.png" alt="">
+                    </a>
+
+
+                    <p> Upon pressing start, we can see the tool output its actions to the shell as it works through parsing the memory image </p>
+
+
+                     <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/mpa-shell.png" alt="">
+                    </a>
+
+                    <p> Upon pressing start, we can see the tool output its actions to the shell as it works through parsing the memory image </p>
+
+                     <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/mpa-folder.png" alt="">
+                    </a>
+                    
+                    <p>Upon entering this directory, there are 11 folders created by the script detailing different things found in the memory image. Most of these folders are named after different windows artifacts. In these folders, you can find output files from different third party tools that process the artifacts. MemProcFS-Analyzer will attempt to extract artifacts from the memory image, and parse them with different tools. Most of these tools are Eric Zimmermans tools, but I did want to mention that Event Logs are also parsed by Zicrolite. </p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/mpa-structure.png" alt="">
+                    </a>
+                    <p>There are two folders however that I would like to talk more about, being the forensic folder, and the sys folder. </p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/mpa-forensic.png" alt="">
+                    </a>
+
+                    <p>Let's start talking about what each of these folders contain. First, the CSV and the XLSX folders. These folders contain different structured files about different properties of memory. A screenshot of the csv folder can be found below. </p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/mpa-csv.png" alt="">
+                    </a>
+
+                    <p> The timeline folder is similar to these two, but rather than general information and metadata, it provides timelines, as the name suggests, but rather than in the CSV or XLSX structure, in plaintext. The yara folder is where the results from custom YARA outputs can be found, granted this settings   is enabled when running the tool against a memory image. The findevil folder contains exactly what it sounds like, output from custom modules integrated to “find evil”. It outputs to a plaintext file, and is highly useful. </p>
+
+
+                      <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/mpa-sys.png" alt="">
+                    </a>
+
+                    <p>Now we have the sys folder. This contains all information related to the system that was pulled from memory, including, but not limited to, networking, drivers, processes, users, and more. Most of these folders here are fairly self explanatory, so I won’t waste time by going over all of them, but you will noticed that here, and throughout the rest of the tool, the way that analyzer displays information, bundled with the regular MemProcFS functionality, can really aid your investigation. </p>
+
+                    <h2 class="section-heading">Wrapping Up</h2>
+
+                    <p>This concludes the mini-series on MemProcFS. This tool is one of the best for memory forensics, especially when bundled with all of the extra functionality provided by the analyzer script. Hopefully this script finds its way into your toolkit, because it is very powerful. If you’d like a more manual way of doing memory investigation, stay tuned, because I will be releasing a post about Volatility soon!</p>
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+      <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="https://twitter.com/_cyberyom">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/thomas-claflin/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/cyberyom/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; CyberYom 2023</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
