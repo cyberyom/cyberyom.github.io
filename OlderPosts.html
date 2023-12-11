@@ -1,36 +1,119 @@
-<!-- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
-
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
     <title>Cyberyom HQ</title>
-
     <!-- Bootstrap Core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-
     <!-- Theme CSS -->
     <link href="css/clean-blog.min.css" rel="stylesheet">
-
     <!-- Custom Fonts -->
     <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+ <style>
+   #popout-box {
+    position: absolute; /* Change from fixed to absolute */
+    top: 50%; /* Adjust this value to align with the start of your articles */
+    right: -300px;
+    width: 300px;
+    height: auto; /* Change from 100% to auto */
+    background-color: #fff;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    transition: right 0.3s ease-in-out;
+    z-index: 9999;
+    margin: 20px;
+    border-radius: 17px; /* Rounded corners */
+    border: 3px solid black; /* 5px black border */
+}
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+/* CSS for the arrow icon */
+/* CSS for the arrow icon */
+#arrow-icon {
+    transition: transform 0.3s ease-in-out;
+    color: #fff; /* Set the arrow color to white */
+    border: 3px solid #fff; /* Add a 3px white border around the arrow */
+    position: absolute;
+    top: 5px; /* Adjust the top position to position the arrow at the top */
+    right: 5px; /* Adjust the right position to position the arrow at the top-right corner */
+    cursor: pointer;
+    font-size: 24px; /* Adjust the font size as needed */
+    width: 32px; /* Set the width of the circle */
+    height: 32px; /* Set the height of the circle */
+    line-height: 32px; /* Center the arrow vertically in the circle */
+    text-align: center; /* Center the arrow horizontally in the circle */
+    border-radius: 50%; /* Create a circle around the arrow */
+}
+
+/* Add hover effect for the arrow icon */
+#arrow-icon:hover {
+    color: #ff0000; /* Change to the desired hover color */
+}
+
+
+
+
+//* Add styles for the close icon */
+.close-icon {
+    position: absolute;
+    top: 50%;
+    left: -30px; /* Adjust the left position to position the arrow as needed */
+    cursor: pointer;
+    font-size: 24px; /* Adjust the font size as needed */
+    color: #333;
+    transform: translateY(-50%); /* Vertically center the arrow */
+}
+
+/* Add hover effect for the close icon */
+.close-icon:hover {
+    color: #ff0000; /* Change to the desired hover color */
+}
+
+
+
+  .dropdown-button {
+        display: block;
+        margin: 3px;
+        padding: 5px;
+        background-color: #fff; /* Set background color to white */
+        border: none;
+        border-radius: 4px; /* Optional: round corners for the button */
+    }
+
+  .panel-heading {
+        background-color: #fff !important; /* Make panel headings white */
+        border-bottom: 1px solid #ddd !important; /* Add a border to separate the headings */
+    }
+
+  .panel-default > .panel-heading {
+        color: #333;
+        background-color: #fff;
+        border-color: #ddd;
+    }
+
+   .panel-body > div:first-child {
+       margin-bottom: 0; /* Reduces or removes the bottom margin */
+   }
+
+   .posted-date {
+    margin-top: 0; /* Reduce or remove the top margin */
+    font-style: italic;
+    font-size: 0.8em;
+    padding-left: 5px; /* Adjust the left padding as needed */
+}
+
+
+</style>
+
+
+
 
 </head>
-
 <body>
 
     <!-- Navigation -->
@@ -182,6 +265,133 @@
             </div>
         </div>
     </footer>
+
+    <!-- Pop-out Box -->
+   <!-- Pop-out Box -->
+<!-- Pop-out Box -->
+<div id="popout-box">
+    <span id="close-popup" class="close-icon">&#9664;</span>
+    <div id="popout-content">
+        <p>&nbsp;&nbsp;&nbsp;Sort by Article Category</p>
+         <!-- First collapsible element in the popout box -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="dropdown-button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Expanding your Toolkit</a>
+                    </h4>
+                </div>
+                <div id="collapseOne" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div>
+                            <a href="/tools/memprocfs-analyzer.html">MemProcFS-Analyzer</a>
+                        </div>
+                        <div class="posted-date">
+                            <p>Posted on 11/25/2023</p>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <a href="/tools/memprocfs.html">MemProcFS</a>
+                        </div>
+                        <div class="posted-date">
+                            <p>Posted on 09/06/2023</p>
+                        </div>
+                    </div>
+                    <!-- Add more entries as needed -->
+                </div>
+            </div>
+<!-- ... other collapsible elements ... -->
+
+
+            <!-- First collapsible element in the popout box -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="dropdown-button" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">ESXI</a>
+                    </h4>
+                </div>
+                <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        <div>
+                            <a href="/ESXI/post2.html">Homelab Setup II</a>
+                        </div>
+                        <div class="posted-date">
+                            <p>Posted on 07/26/2023</p>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <div>
+                            <a href="/ESXI/post1.html">Homelab Setup I</a>
+                        </div>
+                        <div class="posted-date">
+                            <p>Posted on 07/16/2023</p>
+                        </div>
+                    </div>
+                    <!-- Add more entries as needed -->
+                </div>
+            </div>
+
+            <!-- Third collapsible element -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="dropdown-button" data-toggle="collapse" data-parent="#accordion" href="#collapseThree">Coding</a>
+                    </h4>
+                </div>
+                <div id="collapseThree" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <div>
+                            <a href="/coding/post1.html">Assembly Coding: Hello World</a>
+                        </div>
+                        <div class="posted-date">
+                            <p>Posted on 09/17/2023</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Fourth collapsible element -->
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a class="dropdown-button" data-toggle="collapse" data-parent="#accordion" href="#collapseFour">Misc.</a>
+                    </h4>
+                </div>
+                <div id="collapseFour" class="panel-collapse collapse">
+                    <div class="panel-body">
+                        Content for Category 4
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Collapsible elements end here -->
+    </div>
+</div>
+<script>
+    // Function to toggle the popup and flip the arrow when clicked
+    var popoutBox = document.getElementById('popout-box');
+    var arrowIcon = document.getElementById('arrow-icon');
+
+    document.getElementById('close-popup').addEventListener('click', function () {
+        if (popoutBox.style.right === '0px' || popoutBox.style.right === '') {
+            popoutBox.style.right = '-300px'; // Hide the popup
+            arrowIcon.style.transform = 'rotate(0deg)'; // Rotate arrow back to original direction
+        } else {
+            popoutBox.style.right = '0'; // Show the popup
+            arrowIcon.style.transform = 'rotate(180deg)'; // Rotate arrow to indicate open state
+        }
+    });
+</script>
+
+    <!-- Rest of your HTML goes here -->
+<script>
+    window.onload = function() {
+        document.getElementById('popout-box').style.right = '0';
+    };
+</script>
+
+
+
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
