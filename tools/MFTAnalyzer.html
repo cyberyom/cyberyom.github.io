@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Cyberyom HQ</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Theme CSS -->
+    <link href="/css/clean-blog.min.css" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href="/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header page-scroll">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand" href="/index.html">CyberYom</a>
+            </div>
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="/about.html">About</a>
+                    </li>
+                    <li>
+                        <a href="/OlderPosts.html">All Posts</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Page Header -->
+    <!-- Set your background image for this header on the line below. -->
+    <header class="intro-header" style="background-image: url('/tools/img/tool.png')">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <div class="post-heading">
+                        <h1>Expanding your Toolkit: MFTAnalyzer</h1>
+                        <h2 class="subheading">MFT Analysis tool written by me!</h2>
+                        <class="post-meta">Posted by CyberYom on February 24, 2024</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Post Content -->
+    <article>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <p>Howdy all! Its been quite awhile since I’ve been on here… so sorry about that, but I bring some exciting updates! This post will be about a new tool called MFTAnalyzer. MFTAnalyzer is a command line tool built to parse an NTFS $MFT file, and was actually written by me!</p>
+
+                    <p>If you want to download a copy of the tool and follow along with my during this post, feel free to download the tool <a href="https://github.com/cyberyom/MFTAnalyzer" target="_blank" rel="noopener noreferrer">here</a>!</p>
+					
+					<h2 class="section-heading">More about the Tool!</h2>
+					
+					<p>This tool was birthed out of issues I have with a few of the current MFT tools I use, mostly being that they wouldn’t let me search for an MFT entry by file name. This was important for me, as I was working on a case where I was told that certain files would be on a system, but was unable to locate said files. Because the $MFT is a viable source for proving a files existence, I thought that it would be valuable to have a tool that can search for files based off file name, and perhaps even return the path.</p>
+					
+					<p>As I started developing the tool, I found myself adding more and more features, all of which have caused me to switch to this tool solely for MFT analysis. This post will go over all those features, and how to use the tool. </p>
+					
+                    <h2 class="section-heading">First Run</h2>
+
+                    <p>Upon downloading the tool, you can run it with no flags set to get a little introduction, as well as getting pointed to the -h flag. </p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/firstrun.png" alt="">
+                    </a>
+
+                    <p> To view the tools options, pass the -h flag, as mentioned above. This tool has 3 main flags that can be passed, with one of them being a bit special.</p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/help.png" alt="">
+                    </a>
+
+                    <p>Note the ascii art is cut out</p>
+
+                    <h2 class="section-heading">Basic Utilities</h2>
+
+                    <p>To simply run the tool, as mentioned, you will simply pass an $MFT file to it, with no flags. This will parse the entire MFT file, and build tables with relevant information for each entry and attribute type in the entry. This is similar to how templates in tools such as x-ways or 010 editor look. </p>
+
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/runningtool.png" alt="">
+                    </a>
+
+                    <p>The tool will create tables for every entry in the MFT, as well as every attribute detected in that entry. The last line returned by the program is the amount of MFT entries parsed by the tool. In this case, it was 76 </p>
+
+                    <p>On top of this, you can search for specific file entries, using either the file name, or file entry number of the entry. For example, if I ran mftanalyzer.exe $MFT -sn FILENAME, it would show me the entry for the file named FILENAME. If I ran mftanalyzer.exe $MFT -sm 41, it would should me the entry for the file with the MFT entry of 41. </p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/searchingname.png" alt="">
+                    </a>
+
+                    <h2 class="section-heading">Advanced Utilities</h2>
+
+                    <p>his tools shining light is the –shell flag. When passing this flag, the tool will reconstruct the filesystem from the MFT entry, and give you a shell on it, with multiple commands at your disposal.</p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/shell.png" alt="">
+                    </a>
+
+                    <p>Upon passing the help command, we can see that in the shell, we have 8 commands available, being help, ls, cat, find, tree, tree-all, dump, and clear. We already know help, so lets start by looking at ls. </p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/shellhelp.png" alt="">
+                    </a>
+
+                    <p>Because we are in a shell on the system, if we run ls on a directory we know is on the system, we can view the files in that directory, along with the MFT entry numbers of each file in the directory.</p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/shellls.png" alt="">
+                    </a>
+
+                    <p>The cat command will show the file entry for the file passed to cat. In this case, cat names.txt will display the MFT entry for names.txt.</p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/shellcat.png" alt="">
+                    </a>
+
+                    <p>The next command that we can use is the find command. This command will work similarly to how it does on linux systems, where if you type find FILENAME, it will return the path to the file searched.</p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/shellfind.png" alt="">
+                    </a>
+
+                    <p>Tree and tree-all are very similar to each other. Tree will display the file tree of a directory and its sub directories, so if you pass tree DIRECTORY, it will list the file tree from here, including all sub directories. Tree-all will show the file structure for the entire disk.</p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/shelltree.png" alt="">
+                    </a>
+
+                    <p>The last command that we can do, other than clear, which will clear the screen, is the dump command. The dump command is specifically useful for file carving purposes. Depending on if the file passed to dump is resident, or non resident, it will either carve the contents of the file directly from the MFT file, or it will pass the relevant information contained in the MFT file to carve the file.</p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/shelldump1.png" alt="">
+                    </a>
+
+                    <p>Example of dumping a non-resident file.</p>
+
+                    <a href="#">
+                        <img class="img-responsive center-block" src="/tools/img/MFTAnalyzer/shelldump2.png" alt="">
+                    </a>
+
+                    <p>Example of dumping a resident file<p>
+
+
+                    <h2 class="section-heading">Next Steps</h2>
+
+                    <p>Now, this tools logic processing and accuracy have been verified and it is ready for use! As mentioned at the beginning of the blog, it can be downloaded <a href="https://github.com/cyberyom/MFTAnalyzer" target="_blank" rel="noopener noreferrer">here</a>, on my github! That being said, its main hindrance at the moment is speed. This tool was written in python, and gets really slow with larger MFT files. This is currently being worked on, so keep an eye on the repo for more releases of the tool!</p>
+
+
+                </div>
+            </div>
+        </div>
+    </article>
+
+    <hr>
+
+      <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                    <ul class="list-inline text-center">
+                        <li>
+                            <a href="https://twitter.com/_cyberyom">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://www.linkedin.com/in/thomas-claflin/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="https://github.com/cyberyom/">
+                                <span class="fa-stack fa-lg">
+                                    <i class="fa fa-circle fa-stack-2x"></i>
+                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                </span>
+                            </a>
+                        </li>
+                    </ul>
+                    <p class="copyright text-muted">Copyright &copy; CyberYom 2023</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- jQuery -->
+    <script src="/vendor/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+    <!-- Contact Form JavaScript -->
+    <script src="/js/jqBootstrapValidation.js"></script>
+    <script src="/js/contact_me.js"></script>
+
+    <!-- Theme JavaScript -->
+    <script src="/js/clean-blog.min.js"></script>
+
+</body>
+
+</html>
